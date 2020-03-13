@@ -31,7 +31,7 @@ public class IndexController {
 
     @RequestMapping({"","/", "/index"})
     public String getIndexPage(Model model){
-        log.debug("Getting to the Homa page named index!");
+        log.debug("Getting to the Home page named index!");
         model.addAttribute("recipes", recipeService.getRecipes());
         return  "index";
         /*
