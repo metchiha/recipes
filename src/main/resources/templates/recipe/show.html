@@ -20,6 +20,7 @@
             <div class="offset-md-2 col-md-8">
                 <div class="card border-primary mb-3">
                     <div class="card-header text-white bg-primary">
+                            <!--/*@thymesVar id="recipe" type="com.mekontso.recipe.domain.Recipe"*/-->
                             <h1 class="card-title" th:text="${recipe.description}">Recipe Description Here!</h1>
                         </div>
                         <div class="card-body">
@@ -29,9 +30,8 @@
                                 </div>
                                 <div class="col-md-9">
                                     <ul>
-                                        <li>cat one</li>
-                                        <li>cat two</li>
-                                        <li>cat three</li>
+                                        <!--/*@thymesVar id="recipe" type="com.mekontso.recipe.domain.Recipe"*/-->
+                                        <li th:each="category : ${recipe.categories}" th:text="${category.getDescription()}">cat three</li>
                                     </ul>
                                 </div>
                             </div>
@@ -40,13 +40,15 @@
                                     <h5>Prep Time:</h5>
                                 </div>
                                 <div class="col-md-3">
-                                    <p>30 min</p>
+                                    <!--/*@thymesVar id="recipe" type="com.mekontso.recipe.domain.Recipe"*/-->
+                                    <p th:text="${recipe.getPrepTime()+ ' Min'}">30 min</p>
                                 </div>
                                 <div class="col-md-3">
                                     <h5>Difficulty:</h5>
                                 </div>
                                 <div class="col-md-3">
-                                    <p>Easy</p>
+                                    <!--/*@thymesVar id="recipe" type="com.mekontso.recipe.domain.Recipe"*/-->
+                                    <p th:text="${recipe.getDifficulty()}">Easy</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -54,13 +56,15 @@
                                     <h5>Cook Time:</h5>
                                 </div>
                                 <div class="col-md-3">
-                                    <p>30 min</p>
+                                    <!--/*@thymesVar id="recipe" type="com.mekontso.recipe.domain.Recipe"*/-->
+                                    <p th:text="${recipe.getCookTime() + ' Min'}">30 min</p>
                                 </div>
                                 <div class="col-md-3">
                                     <h5>Serving:</h5>
                                 </div>
                                 <div class="col-md-3">
-                                    <p>4</p>
+                                    <!--/*@thymesVar id="recipe" type="com.mekontso.recipe.domain.Recipe"*/-->
+                                    <p th:text="${recipe.getServing()}">4</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -68,13 +72,15 @@
                                     <h5>Source:</h5>
                                 </div>
                                 <div class="col-md-3">
-                                    <p>30 min</p>
+                                    <!--/*@thymesVar id="recipe" type="com.mekontso.recipe.domain.Recipe"*/-->
+                                    <p th:text="${recipe.getSource()}">30 min</p>
                                 </div>
                                 <div class="col-md-3">
                                     <h5>URL:</h5>
                                 </div>
                                 <div class="col-md-3">
-                                    <p>http://www.example.com</p>
+                                    <!--/*@thymesVar id="recipe" type="com.mekontso.recipe.domain.Recipe"*/-->
+                                    <p th:text="${recipe.getSource()}">http://www.example.com</p>
                                 </div>
                             </div>
                         </div>
@@ -94,9 +100,11 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <ul>
-                                                <li>1 Cup of milk</li>
-                                                <li>1 Teaspoon of chocolate</li>
-                                                <li>1 Teaspoon of sugar</li>
+                                                <!--/*@thymesVar id="recipe" type="com.mekontso.recipe.domain.Recipe"*/-->
+                                                <li th:each="ingredient : ${recipe.ingredients}"
+                                                    th:text="${ingredient.amount + ' ' +
+                                                    ingredient.unitOfMeasure.getUom() + ' - ' +
+                                                    ingredient.getDrescription()}">1 Cup of milk</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -116,7 +124,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>You may have observed that computing these sums from 1 to 10, 20 to 37, and 35 to 49
+                                    <!--/*@thymesVar id="recipe" type="com.mekontso.recipe.domain.Recipe"*/-->
+                                    <p th:text="${recipe.getDirections()}">You may have observed that computing these sums from 1 to 10, 20 to 37, and 35 to 49
                                         are very similar, except that the starting and ending integers are different. Wouldn’t it be nice
                                         if we could write the common code once and reuse it? We can do so by defining a method and
                                         invoking it.</p>
@@ -137,7 +146,8 @@
                         <div class="card-body text-black">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>A method may return a value. The returnValueType is the data type of the value the
+                                    <!--/*@thymesVar id="recipe" type="com.mekontso.recipe.domain.Recipe"*/-->
+                                    <p th:text="${recipe.notes.recipeNotes}">A method may return a value. The returnValueType is the data type of the value the
                                         method returns. Some methods perform desired operations without returning a value. In this
                                         case, the returnValueType is the keyword void. For example, the returnValueType is
                                         void in the main method, as well as in System.exit, and System.out.println. If a

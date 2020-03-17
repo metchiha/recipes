@@ -1,9 +1,15 @@
 package com.mekontso.recipe.services;
 
+import com.mekontso.recipe.commands.RecipeCommand;
+import com.mekontso.recipe.converters.RecipeCommandToRecipe;
+import com.mekontso.recipe.converters.RecipeToRecipeCommand;
 import com.mekontso.recipe.domain.Recipe;
 import com.mekontso.recipe.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -14,9 +20,14 @@ import java.util.Set;
 public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
+    private final RecipeCommandToRecipe recipeCommandToRecipe;
+    private final RecipeToRecipeCommand recipeToRecipeCommand;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, @Lazy RecipeCommandToRecipe recipeCommandToRecipe,
+                             @Lazy RecipeToRecipeCommand recipeToRecipeCommand) {
         this.recipeRepository = recipeRepository;
+        this.recipeCommandToRecipe = recipeCommandToRecipe;
+        this.recipeToRecipeCommand = recipeToRecipeCommand;
     }
 
     @Override
@@ -34,5 +45,14 @@ public class RecipeServiceImpl implements RecipeService {
             throw new RuntimeException("Recipe Not Found!");
         }
         return recipeOptional.get();
+    }
+
+    @Transactional
+    @Override
+    public RecipeCommand saveRecipeCommand(RecipeCommand command) {
+        Recipe detachedRecipe = recipeCommandToRecipe.convert(command);
+        Recipe savedRecipe = recipeRepository.save(detachedRecipe);
+        log.debug("Saved Recipe Id: " + savedRecipe.getId());
+        return  recipeToRecipeCommand.convert(savedRecipe);
     }
 }

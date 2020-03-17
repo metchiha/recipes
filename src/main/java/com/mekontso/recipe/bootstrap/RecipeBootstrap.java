@@ -144,6 +144,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         Notes guacNotes = new Notes();
         guacNotes.setRecipeNotes("Be careful handling chiles if using. Wash your hands thoroughly after handling and do not touch your eyes or the area near your eyes with your hands for several hours.");
         guacRecipe.setNotes(guacNotes);
+        guacRecipe.setServing("Serve it fresh");
+        guacRecipe.setSource("https://www.allrecipes.com/recipe/14231/guacamole/");
         //guacNotes.setRecipe(guacRecipe);
 
         guacRecipe.addIngredient(new Ingredient("ripe avocados", new BigDecimal(2), eachUom));
@@ -179,6 +181,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         Notes tacosNotes = new Notes();
         tacosNotes.setRecipeNotes("Look for ancho chile powder with the Mexican ingredients at your grocery store, on buy it online. (If you can't find ancho chili powder, you replace the ancho chili, the oregano, and the cumin with 2 1/2 tablespoons regular chili powder, though the flavor won't be quite the same.)");
         tacosRecipe.setNotes(tacosNotes);
+        tacosRecipe.setServing("Should better be warm.");
+        tacosRecipe.setSource("https://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/");
         //tacosNotes.setRecipe(tacosRecipe);
 
         tacosRecipe.addIngredient(new Ingredient("Ancho Chili Powder", new BigDecimal(2), tableSpoonUom));
