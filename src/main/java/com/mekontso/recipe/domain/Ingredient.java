@@ -14,7 +14,7 @@ public class Ingredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String drescription;
+    private String description;
     private BigDecimal amount;
 
     @ManyToOne
@@ -27,7 +27,7 @@ public class Ingredient {
     }
 
     public Ingredient(String drescription, BigDecimal amount, UnitOfMeasure unitOfMeasure) {
-        this.drescription = drescription;
+        this.description = drescription;
         this.amount = amount;
         this.unitOfMeasure = unitOfMeasure;
     }

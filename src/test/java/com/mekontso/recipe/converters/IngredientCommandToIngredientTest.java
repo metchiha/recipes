@@ -41,7 +41,7 @@ class IngredientCommandToIngredientTest {
         //Given
         IngredientCommand command = new IngredientCommand();
         command.setId(ID_VALUE);
-        command.setDrescription(DESCRIPTION);
+        command.setDescription(DESCRIPTION);
         command.setAmount(AMOUNT);
         UnitOfMeasureCommand uom = new UnitOfMeasureCommand();
         uom.setId(UOM);
@@ -54,7 +54,7 @@ class IngredientCommandToIngredientTest {
         assertNotNull(ingredient);
         assertNotNull(ingredient.getUnitOfMeasure());
         assertEquals(ID_VALUE, ingredient.getId());
-        assertEquals(DESCRIPTION, ingredient.getDrescription());
+        assertEquals(DESCRIPTION, ingredient.getDescription());
         assertEquals(AMOUNT, ingredient.getAmount());
     }
 }

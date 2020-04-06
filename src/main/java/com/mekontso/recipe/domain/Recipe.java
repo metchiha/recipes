@@ -20,6 +20,7 @@ public class Recipe {
     private int cookTime;
     private String serving;
     private String source;
+    private String url;
 
     @Lob
     private String directions;
@@ -115,6 +116,14 @@ public class Recipe {
 
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Byte[] getImage() {

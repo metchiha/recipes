@@ -10,7 +10,9 @@ import java.math.BigDecimal;
 public class IngredientCommand {
     private Long id;
 
-    private String drescription;
+    private Long recipeId;
+
+    private String description;
     private BigDecimal amount;
     private RecipeCommand recipe;
     private UnitOfMeasureCommand unitOfMeasure;

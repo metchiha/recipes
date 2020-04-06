@@ -4,6 +4,7 @@ import com.mekontso.recipe.commands.RecipeCommand;
 import com.mekontso.recipe.converters.RecipeCommandToRecipe;
 import com.mekontso.recipe.converters.RecipeToRecipeCommand;
 import com.mekontso.recipe.domain.Recipe;
+import com.mekontso.recipe.exceptions.NotFoundException;
 import com.mekontso.recipe.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,9 +43,19 @@ public class RecipeServiceImpl implements RecipeService {
     public Recipe findById(Long id) {
         Optional<Recipe> recipeOptional = recipeRepository.findById(id);
         if(!recipeOptional.isPresent()){
-            throw new RuntimeException("Recipe Not Found!");
+            throw new NotFoundException("Not Found. For id value " + id.toString());
         }
         return recipeOptional.get();
+    }
+
+    @Transactional
+    @Override
+    public RecipeCommand findCommandById(Long id) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
+        if(!recipeOptional.isPresent()){
+            throw new NotFoundException("Recipe Not Found. For id value " + id.toString());
+        }
+        return recipeToRecipeCommand.convert(recipeRepository.findById(id).get());
     }
 
     @Transactional
@@ -54,5 +65,10 @@ public class RecipeServiceImpl implements RecipeService {
         Recipe savedRecipe = recipeRepository.save(detachedRecipe);
         log.debug("Saved Recipe Id: " + savedRecipe.getId());
         return  recipeToRecipeCommand.convert(savedRecipe);
+    }
+
+    @Override
+    public void deleteById(Long idToDelete) {
+        recipeRepository.deleteById(idToDelete);
     }
 }
