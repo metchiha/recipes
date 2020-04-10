@@ -8,7 +8,7 @@ CREATE USER 'sfg_prod_user'@'192.168.99.100' IDENTIFIED BY 'mekontso';
 CREATE USER 'sfg_dev_user'@'%' IDENTIFIED BY 'mekontso';
 CREATE USER 'sfg_prod_user'@'%' IDENTIFIED BY 'mekontso';
 
-#Database grants
+#Database grants some updates
 GRANT SELECT ON sfg_dev.* to 'sfg_dev_user'@'192.168.99.100';
 GRANT INSERT ON sfg_dev.* to 'sfg_dev_user'@'192.168.99.100';
 GRANT DELETE ON sfg_dev.* to 'sfg_dev_user'@'192.168.99.100';
