@@ -1,4 +1,4 @@
-# Java Maven Circle CI 2.0 configuration file
+# Java Maven CircleCI 2.0 configuration file
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
@@ -6,32 +6,36 @@ version: 2
 jobs:
   build:
     docker:
-      #specify the version you desire here
-        -image: circleci/openjdk:8-jdk
-        # Specify the service dependencies here if necessary
-        # CircleCI mainatains a library of prebuilt images
-        # Documented at https://circleci.com/docs/2.0/circleci-images/
-        # - image: circleci/postgres:9.4
+      # specify the version you desire here
+      - image: circleci/openjdk:8-jdk
 
-        working_directory: ~/repo
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
 
-        environment:
-          # Customize the JVM maximum help limit
-          MAVEN_OPTS: -Xmx3200m
+    working_directory: ~/repo
 
-        steps:
-          -checkout
-          # Download and cache dependencies
-          -restore_cache:
-              keys:
-              -v1-dependencies-{{ checksum "pom.xml" }}
-              # fallback to using the latest cache if no exact match is found
-              -v1-dependencies-
-          -run: mvn dependency:go-offline
+    environment:
+      # Customize the JVM maximum heap limit
+      MAVEN_OPTS: -Xmx3200m
 
-          -save_cache:
-              path:
-                - ~/.m2
-                key: v1-dependencies-{{ checksum "pom.xml" }}
-          # run tests!
-          -run: mvn integration-test
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "pom.xml" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      # run tests!
+      - run: mvn integration-test
